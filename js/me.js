@@ -181,7 +181,7 @@ let x = setInterval(function() {
       
     }
 
-    awalan.addEventListener('click',(e)=>{
+    window.addEventListener('click',(e)=>{
       buka();
     });
 
