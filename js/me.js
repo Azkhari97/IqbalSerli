@@ -151,7 +151,7 @@ let x = setInterval(function() {
       if(hitung > 1){
         hitung = 1;
         if(tem > tinggi){
-          menu.style.bottom = "12vh";
+          menu.style.bottom = "15vh";
           
         }
         else{
