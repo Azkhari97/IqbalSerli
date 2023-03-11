@@ -69,7 +69,7 @@ let url = document.location.href;
     console.log(e.toString())
   });
   }
-  greet_update();
+  //greet_update();
   
   let dataNikah = {
     "judul" : "Iqbal & Serly",
@@ -374,6 +374,6 @@ let x = setInterval(function() {
   }
   
   
-
+   
    AOS.init();
-    
+   greet_update();
