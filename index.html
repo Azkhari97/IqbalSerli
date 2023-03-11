@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Undangan pernikahan ~ Iqbal & Serli" />
+    <meta property="og:image" 
+    content="./galeri/IMG-20230216-WA0006.jpg" />
+    
+    
+    <title>
+      Undangan Pernikahan ~ Iqbal & Serli
+    </title>
+    
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/timeline.css" />
+    <link rel="stylesheet" href="css/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+      <!-- Make sure you put this AFTER Leaflet's CSS -->
+      <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+     integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+     crossorigin=""></script>
+    
+    
+    <script src="js/aos.js"></script>
+    <style>
+     * {
+       padding: 0;
+       margin: 0;
+       font-family : cursive;
+       
+     }
+     
+     @font-face {
+       font-family: "parisienne";
+       src: url('assets/Parisienne-Regular.ttf');
+     }
+     
+     
+      section {
+        height: 100vh;
+      
+        width: 100vw;
+        
+        background: url('assets/frame0.png') no-repeat -2vw 73vh, url('assets/frame2.png') no-repeat 63vw -2vh;
+        background-size: 50%, 50%;
+        background-attachment: fixed, fixed;
+        
+      }
+      a {
+        font-family: arial;
+        
+        color: #000;
+        text-shadow: 1px 1px 1px 1px #000;
+      }
+      .nama {
+        font-family: cursive;
+        font-size: 40px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: rgb(26,136,85);/*#E5EBB2;*/
+        text-shadow: -1px -1px 5px #fff;
+        padding: 0 5px;
+      }
+      p {
+        font-family: arial;
+        margin-bottom: 0;
+        font-size: 13px;
+        padding: 0 2%;
+      }
+      h2 {
+        font-size: 28px;
+        letter-spacing: 1px;
+        font-weight: bolder;
+        text-shadow: 0px 2px #fff;
+      }
+      #counter {
+        width: 90%;
+        /*border: 1px solid #198754;*/
+        display: flex;
+      }
+      .section-title {
+        font-size: 28px;
+        color: #198754;
+        text-shadow: -1px -1px 3px #fff;
+        font-weight: bold;
+      }
+      .count {
+        border-radius: 5px;
+        width: 20%;
+        height: 36px;
+        margin: 0 2%;
+        padding: 5px;
+        color: white;
+        background: #299764;
+        text-align: center;
+        
+      }
+      .card {
+        border: unset;
+      }
+      .card-me {
+        width: 100%;
+        height: 96%;
+        /*
+        border: 1px solid #299764;
+        
+        box-shadow: 0px 0px 7px 2px #fff;
+        */
+        background: rgba(255,255,255,.0);
+     
+      }
+      .foto {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        border: 5px solid rgba(255,255,255,.3);
+        box-shadow: -1px -1px 3px 2px #aaa;
+      }
+      .ortu {
+        font-family: arial;
+        font-weight: bold;
+        font-size: 13px;
+      }
+      
+      .acara {
+        border: 2px solid #4FA095;
+        border-width: 2px 0;
+        border-radius: 10px;
+        /*
+        box-shadow: 2px 2px 1px 2px #000;
+        */
+        width: 90%;
+        padding: 10px;
+      }
+      
+      #peta {
+        height: 200px;
+        position: relative;
+      }
+      #tombol-peta {
+        position: absolute;
+        left: 1%;
+        bottom: 0;
+        /*
+        padding: 5px;
+        border-radius: 5px;
+        background: rgba(26,136,85,.7);
+        */
+        z-index: 1000;
+      }
+      
+      hr {
+        margin: 5px auto;
+      }
+      #kepada {
+        width: 90%;
+        height: 90px;
+        border: 1px solid #999;
+        border-radius: 5px;
+      }
+      .penerima, .alamat-penerima {
+        font-family: arial;
+      }
+      .penerima {
+        font-weight: bold;
+      }
+      
+      #cover {
+        background: url('assets/cover_bg.jpg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        position: relative;
+      }
+      
+      #cover-of {
+        background: linear-gradient(to top, #fff, rgba(255, 255, 255, .0));
+        border-radius: 5px 5px 0 0;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        padding-top: 50px;
+        padding-bottom: 9vh;
+      }
+    
+    #awalan {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1001;
+      width: 100vw;
+      height: 100vh;
+      background: url('assets/bg3.jpg') no-repeat center center;
+      background-size: cover;
+    }
+    
+    @keyframes fadeMasuk {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+    
+    .fadeIn {
+      animation: fadeMasuk 0.5s linear;
+    }
+    
+    @keyframes fadeKeluar {
+      from {
+        opacity: 1;
+      }
+      to {
+        opacity: 0;
+      }
+    }
+    .fadeOut {
+      animation: fadeKeluar 0.5s linear;
+    }
+    
+    
+    
+      @keyframes menuAnim {
+        0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+      }
+    
+      #menu {
+        width: 94vw;
+        height: 7vh;
+        color: #fff;
+        border-radius: 5px;
+        position: fixed;
+        bottom: 1vh;
+        left: 0;
+        z-index: 4;
+        margin: 0 3vw;
+        overflow-x: scroll;
+        box-shadow: 1px 1px 3px 1px #000;
+        background: linear-gradient(45deg, 
+        rgba(26,136,85,.8), 
+        rgba(26,136,85,.7), 
+        rgba(255,255,255, .5));
+        background-size: 400% 400%;
+        animation-name: menuAnim;
+        animation-iteration-count: infinite;
+        animation-duration: 5s;
+        animation-timing-function: linear;
+      }
+      
+      
+      .menu-item {
+        width: 20%;
+        text-decoration: none;
+        font-size: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        color: #fff;
+        
+      }
+      .over, .greet-container {
+        border: 2px solid #4FA095;
+        border-radius: 8px;
+        border-width: 2px 0 2px 0;
+        padding-top: 3vh;
+        width: 90%;
+      }
+      
+      #history {
+        height: auto;
+        padding-bottom: 5vh;
+      }
+      .over {
+        height: auto;
+      }
+      
+      .greet-container {
+        overflow-y: scroll;
+        margin: 20px auto;
+        margin-top: 7%;
+        height: 80vh;
+      
+        padding-top: 1%;
+        position: relative;
+      }
+      .tulis {
+        padding: 10px;
+        border-radius: 5px;
+        position: absolute;
+        font-size: 10px;
+        font-family: arial;
+        right: 5%;
+        bottom: -5%;
+        color: #fff;
+        background: rgb(26,136,85);
+      }
+      .greet {
+        width: 95%;
+        padding: 10px;
+        margin: 2px auto;
+        text-align: center;
+        color: #fff;
+        border-radius: 6px;
+        font-family: arial;
+        background: rgba(26,136,85,.8);
+      }
+      .greet-title {
+        font-size: 20px;
+        font-weight: bold;
+        font-family: cursive;
+      }
+      .greet-ket{
+        color: #000;
+        font-family: arial;
+        font-size: 12px;
+        margin-left: 5px;
+      }
+      .galeri-container {
+        padding-top: 15px;
+        padding-bottom: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 90%;
+        border-radius: 8px;
+        border-top: 2px solid #4FA095;
+        border-bottom: 2px solid #4FA095;
+        margin-top: 1vh;
+      }
+      
+      .galeri-item {
+        width: 80px;
+        height: 100px;
+        margin: 1px;
+        border-radius: 5px;
+        border: 1px solid rgb(26,136,85);
+      }
+      
+      @media screen and (min-width: 480px){
+        .galeri-item {
+          width: 200px;
+          height: 260px;
+        }
+      }
+    
+      
+    </style>
+  </head>
+  <body>
+    
+    <div id="menu" class="d-flex justify-content-center align-items-center text-center">
+      <div class="menu-item">
+        <i class="fa fa-book icon"></i>
+        <a href="#cover" class="menu-item">
+        Cover</a>
+      </div>
+      <div class="menu-item">
+        <i class="far fa-heart icon"></i>
+        <a href="#pembukaan" class="menu-item">
+        Couple</a>
+      </div>
+      <div class="menu-item">
+        <i class="far fa-calendar icon"></i>
+        <a href="#waktu_acara" class="menu-item">
+        Events</a>
+      </div>
+      <div class="menu-item">
+        <i class="fa fa-ring icon"></i>
+        <a href="#history" class="menu-item">
+        Story</a>
+      </div>
+      <div class="menu-item">
+        <i class="fa fa-image icon"></i>
+        <a href="#galeri" class="menu-item">
+        Gallery</a>
+      </div>
+      <div class="menu-item">
+        <i class="fa fa-edit icon"></i>
+        <a href="#ucapan" class="menu-item">
+        Greetings</a>
+      </div>
+      <div class="menu-item">
+        <i class="far fa-message icon"></i>
+        <a href="#penutup" class="menu-item">
+        Thanks</a>
+      </div>
+    </div>
+   
+   <!--cover-->
+    <section id="awalan" class="container-fluid d-flex justify-content-center align-items-center">
+      
+      <div class="card card-me d-flex flex-column justify-content-center align-items-center" data-aos="fade-in">
+      
+      <div class="mt-2 d-flex flex-column justify-content-center align-items-center w-100">
+        <h2 class="mb-0">
+          The Wedding of
+        </h2>
+        <h1 class="nama mb-0 data" part="nick" data-aos-once="true">
+           Iqbal &amp; Serli
+        </h1>
+        <p style="font-size: 15px;" class="data" part="tanggal">Kamis, 27 April 2023</p>
+      </div>
+      
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <img class="img-fluid w-75" src="assets/std4.png" alt="save the date" />
+        <p class="mb-1">Hitung mundur menuju acara</p>
+        <div id="counter" class="d-flex justify-content-center align-items-center">
+          <div id="hari" class="count">
+            00
+          </div>
+          <div id="jam" class="count">
+            00
+          </div>
+          <div id="menit" class="count">
+            00
+          </div>
+          <div id="detik" class="count">
+            00
+          </div>
+        </div>
+      </div>
+        
+        <div class="w-100 d-flex flex-column justify-content-center align-items-center">
+        <p>Yth. Bapak/Ibu/Saudara/i</p>
+        <div id="kepada" class="d-flex flex-column justify-content-center align-items-center">
+          <h3 class="penerima data" part="penerima">
+            Afzal Azkhari
+          </h3>
+          <p class="alamat-penerima data" part="alamatpenerima">
+            di tempat
+          </p>
+        </div>
+        <button onclick="buka()" class="my-1 btn btn-success btn-md" style="width: 90%; font-family: arial; border: 2px solid #000; color: #000; background: rgba(255,255,255,.7)">
+          Buka Undangan
+        </button>
+        </div>
+      
+      </div>
+      
+      </section>
+      
+      <section id="cover" class="container-fluid">
+        
+      
+        
+      <div id="cover-of" class="d-flex flex-column justify-content-end align-items-center w-100">
+        
+      <h2 class="mb-0">
+        The Wedding of
+      </h2>
+      <h1 class="nama mb-0 data" part="nick">
+        Iqbal &amp; Serli
+      </h1>
+      <p style="font-size: 15px;" class="mb-0 data" part="tanggal">
+      Kamis, 27 April 2023
+      </p>
+      
+      </div>
+      
+    
+      
+    </section>
+    
+    <!--Pembukaan-->
+    
+    <section id="pembukaan" class="container d-flex justify-content-center align-items-center">
+      <div class="card card-me d-flex flex-column justify-content-start align-items-center text-center">
+        <img class="mx-auto text-center" style="width: 200px;" alt="Bismillah" src="assets/bismillah3.png" />
+        <p class="mb-0"><i style="font-size: 16px">
+          Assalamu'alaikum Warahmatullahi Wabarakatuh</i>
+          </p>
+        <p style="font-size: 13px;">
+          Dengan memohon rahmat dan ridho Allah SWT, <br>
+          Mohon do'a restu Bapak/Ibu/Saudara/i dalam rangka melangsungkan pernikahan putra-putri kami:
+        </p>
+        
+        <div class="my-3 container d-flex justify-content-center align-items-center py-2">
+          <div>
+            <img class="foto data" part="fputra" alt="mempelai putra" src="assets/ikbal.png" data-aos="zoom-in-left" />
+          </div>
+          <div style="font-size: 20px; font-weight: bolder;" class="mx-2"></div>
+          <div>
+            <img class="foto data" part="fputri" alt="mempelai putri" src="assets/serli.png" data-aos="zoom-in-right" />
+          </div>
+        </div>
+        
+        <div class="">
+          <h2 class="data nama mb-0" part="nputra">
+            Ahmad Ikbal
+            <span class="data" part="gelarputra">
+              , S. Pd
+            </span>
+            </h2>
+            <hr class="w-75 mx-auto my-1" />
+          <p data-aos="zoom-in-down" style="font-size: 13px;">Putra Bapak <span class="data ortu" part="ayahputra">Nurokhim</span> dan Ibu <span class="data ortu" part="ibuputra">Siti Fauziyah</span>,</p>
+          <p data-aos="fade-in" data-aos-delay="150" class="data" style="font-size: 13px;" part="alamatputra">
+            Dk. Mrican Timur, Desa Mrican, RT 05/ RW 08, Kec. Sragi, Kab. Pekalongan
+          </p>
+          <h2 class="my-1">&amp;</h2>
+          <h2 class="data nama mb-0" part="nputri">
+            Serli Marselina
+            <span class="data" part="gelarputri">
+            
+            </span>
+            </h2>
+            <hr class="w-75 mx-auto my-1" />
+          <p data-aos="zoom-in-down" style="font-size: 13px;">Putri Bapak <span class="data ortu" part="ayahputri">Muaeni</span> dan Ibu <span class="data ortu" part="ibuputri">Mariah</span>,</p>
+          <p data-aos="fade-in" data-aos-delay="150" class="data" style="font-size: 13px;" part="alamatputri">
+            Dusun II Butak, Desa Pecangakan, RT 01/ RW 02, Kec. Comal, Kab. Pemalang
+          </p>
+        </div>
+        
+      </div>
+    </section>
+    
+    <!--waktu acara-->
+    <section id="waktu_acara" class="container d-flex justify-content-center align-items-center">
+      <div class="card card-me text-center d-flex flex-column align-items-center justify-content-start">
+        <h3 class="mt-2 section-title">Event Schedule</h3>
+        
+        <div id="akad" class="acara my-1">
+          <h3 style="font-weight:bolder;letter-spacing: 2px;" data-aos="fade-in">Akad Nikah</h3>
+          <hr class="w-75 mx-auto" />
+          <div class="d-flex justify-content-center align-items-center">
+          <p class="flex-wrap" data-aos="zoom-in-left">
+            <b class="data text-success" part="hariakad" style="font-family: arial; font-size: 18px; letter-spacing: 1px;">
+              Kamis
+            </b>
+            <br>
+            <span class="data text-secondary" part="jamakad" style="font-family: monospace; font-size: 20px;">
+            09.00
+            </span>
+          </p>
+          <div class="data mx-2 d-flex justify-content-center align-items-center bg-success text-white" part="tanggalakad" style="width:50px; height: 50px; border-radius: 50%; border: 5px solid #fff; box-shadow: 0px 0px 2px #000; font-weight: bold;">
+            27
+          </div>
+          <p class="flex-wrap" data-aos="zoom-in-right">
+            <b class="data text-success" part="bulanakad" style="font-family: arial; font-size: 18px; letter-spacing: 1px;">
+            April 
+            </b>
+            <br>
+            <span class="data text-secondary" part="tahunakad" style="font-family: monospace; font-size: 20px;">
+            2023
+            </span>
+          </p>
+          </div>
+          <hr class="w-75 mx-auto" />
+          <p data-aos="fade-in" data-aos-delay="150" class="data" part="alamatakad">
+            di rumah mempelai perempuan, Dusun II Butak, Desa Pecangakan, RT 01/ RW 02, Kec. Comal, Kab. Pemalang
+          </p>
+        </div>
+        
+        <div id="resepsi" class="acara my-1">
+          <h3 style="font-weight:bolder;letter-spacing: 2px;" data-aos="fade-in">Resepsi</h3>
+          <hr class="w-75 mx-auto" />
+          <div class="d-flex justify-content-center align-items-center">
+          <p class="flex-wrap" data-aos="zoom-in-left">
+            <b class="data text-success" part="hariresepsi" style="font-family: arial; font-size: 18px; letter-spacing: 1px;">
+              Kamis
+            </b>
+            <br>
+            <span class="data text-secondary" part="jamresepsi" style="font-family: monospace; font-size: 20px;">
+            11.00
+            </span>
+            </p>
+          <div class="data mx-2 d-flex justify-content-center align-items-center bg-success text-white" part="tanggalresepsi" style="width:50px; height: 50px; border-radius: 50%; border: 5px solid #fff; box-shadow: 0px 0px 2px #000; font-weight: bold;">
+            27
+          </div>
+          <p class="flex-wrap" data-aos="zoom-in-right">
+            <b class="data text-success" part="bulanresepsi" style="font-family: arial; font-size: 18px; letter-spacing: 1px;">
+            April 
+            </b>
+            <br>
+            <span class="data text-secondary" part="tahunresepsi" style="font-family: monospace; font-size: 20px;">
+            2023
+            </span>
+          </p>
+          </div>
+          <hr class="w-75 mx-auto" />
+          <p data-aos="fade-in" data-aos-delay="150" class="data" part="alamatresepsi">
+           di rumah mempelai perempuan, Dusun II Butak, Desa Pecangakan, RT 01/ RW 02, Kec. Comal, Kab. Pemalang
+          </p>
+        </div>
+        
+        
+        
+        <div class="acara my-1" id="peta">
+          <div style="width: 100%; height: 100%;"
+  id="map"></div>
+        <button class="btn btn-sm btn-success" onclick="window.open('http://maps.google.com/?q=-6.920654,109.537815')" id="tombol-peta" class="text-light">Buka di Google Maps</button>
+        </div>
+        
+        
+        
+      </div>
+    </section>
+    
+    <!--timeline nikah -->
+    
+    <section id="history" class="container d-flex justify-content-center align-items-center">
+      
+      <div class="card card-me text-center">
+        <h3 class="my-2 section-title">Our Love Story</h3>
+        <div class="over container">
+      	<ul class="timeline animate-box">
+						<li class="animate-box">
+							<div class="timeline-badge" style="background-image:url(assets/couple-1.jpg);"></div>
+							<div class="timeline-panel">
+								<div class="timeline-heading">
+									<h3 class="timeline-title">First Meet</h3>
+									<span class="date">16 November 2022</span>
+									<hr class="w-75 mx-auto" />
+								</div>
+								<div class="timeline-body">
+									<p>
+									  Pertemuan pertama dimulai pada 16 November 2022, berkomitmen pada diri masing-masing yaitu selalu berusaha menjadi lebih baik khususnya untuk diri sendiri sebelum nantinya untuk orang lain. Kami saling mengenal latar belakang satu sama lain dan pada akhirnya diyakinkan oleh keadaan, hingga menjalin hubungan ke jenjang yang lebih serius yaitu Pernikahan.
+									</p>
+								</div>
+							</div>
+						</li>
+						<li class="timeline-inverted animate-box">
+							<div class="timeline-badge" style="background-image:url(assets/couple-1.jpg);"></div>
+							<div class="timeline-panel">
+								<div class="timeline-heading">
+									<h3 class="timeline-title">Family Gathering</h3>
+									<span class="date">18 Desember 2022</span>
+									<hr class="w-75 mx-auto" />
+								</div>
+								<div class="timeline-body">
+									<p>
+									  Kami mempertemukan keluarga kami untuk mempererat tali silaturahmi dan untuk meminta restu dari orang tua kami untuk melanjutkan hubungan kami ke jenjang yang lebih serius.
+									</p>
+								</div>
+							</div>
+						</li>
+						<li class="animate-box">
+							<div class="timeline-badge" style="background-image:url(assets/couple-1.jpg);"></div>
+							<div class="timeline-panel">
+								<div class="timeline-heading">
+									<h3 class="timeline-title">Prewedding</h3>
+									<span class="date">04 Februari 2023</span>
+									<hr class="w-75 mx-auto" />
+								</div>
+								<div class="timeline-body">
+									<p>
+									  Kami mulai mempersiapkan acara pernikahan kami dan mengabadikan moment-moment kebersamaan kami sebagai galeri dan cerita setelah kami menikah nanti.
+									</p>
+								</div>
+							</div>
+						</li>
+						<li class="timeline-inverted animate-box">
+							<div class="timeline-badge" style="background-image:url(assets/couple-1.jpg);"></div>
+							<div class="timeline-panel">
+								<div class="timeline-heading">
+									<h3 class="timeline-title">Wedding</h3>
+									<span class="date">27 April 2023</span>
+									<hr class="w-75 mx-auto" />
+								</div>
+								<div class="timeline-body">
+									<p>
+									  Kami memutuskan pada hari Kamis tanggal 27 April 2023 menjadi hari spesial dimana hari tersebut kami mengadakan Akad Nikah. Alhamdulillah dengan ijin dan ridho Allah SWT kami masih diberi nikmat untuk mengikuti sunnah Nabi Muhammad SAW yaitu Pernikahan.
+									</p>
+								</div>
+							</div>
+						</li>
+						
+			    	</ul>
+        </div>
+      </div>
+      
+    </section>
+    
+    <!--Gallery-->
+    <section id="galeri" class="container d-flex justify-content-center align-items-center">
+      
+      <div class="card card-me text-center">
+        <h3 class="my-2 section-title">Gallery Prewedding</h3>
+        
+        <div class="galeri-container container d-flex justify-content-center align-items-center">
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0006.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0007.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0008.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0009.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0010.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0011.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0012.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0013.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0014.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0015.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0016.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0017.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0018.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0019.jpg" />
+          <img class="galeri-item" alt="foto-prewedding" src="galeri/IMG-20230216-WA0020.jpg" />
+        </div>
+        
+      </div>
+      
+    </section>
+    
+    <!-- Gift -->
+    <section id="gift" class="container d-flex flex-column justify-content-center align-items">
+      
+      <div class="card card-me d-flex flex-column align-items-center justify-content-center px-2 text-center" style="position: relative;">
+        
+        <h3 style="position: absolute; top: 0;" class="my-2 mx-auto section-title">
+          Gift
+        </h3>
+        
+        <div class="d-flex flex-column align-items justify-content-between h-50 text-center">
+        <p>
+          Tanpa mengurangi rasa hormat, untuk melengkapi kebahagiaan pengantin, Anda dapat memberikan tanda kasih melalui nomor rekening / dompet digital berikut ini :
+        </p>
+        
+        <div class="w-75 mt-2 mb-1 mx-auto">
+          <p>
+            Bank BCA a/n Ahmad Ikbal
+          </p>
+          <div class="border border-success p-1 my-2">
+            <p id="rekening-0">
+              3560293061
+            </p>
+          </div>
+          <button onclick="copyFunction('rekening-0')" class="btn btn-sm btn-success w-75 salin-rekening"><i class="fa fa-copy"></i> Salin Rekening</button>
+        </div>
+        <div class="w-75 mt-2 mb-1 mx-auto">
+          <p>
+            Bank BRI a/n Ahmad Ikbal
+          </p>
+          <div class="border border-success p-1 my-2">
+            <p id="rekening-3">
+              598601036076533
+            </p>
+          </div>
+          <button onclick="copyFunction('rekening-3')" class="btn btn-sm btn-success w-75 salin-rekening"><i class="fa fa-copy"></i> Salin Rekening</button>
+        </div>
+        
+        <div class="w-75 mt-2 mb-1 mx-auto">
+          <p>
+            Bank Mandiri a/n Serli Marselina
+          </p>
+          <div class="border border-success p-1 my-2">
+            <p id="rekening-1">
+              1360018770062
+            </p>
+          </div>
+          <button onclick="copyFunction('rekening-1')" class="btn btn-sm btn-success w-75 salin-rekening"><i class="fa fa-copy"></i> Salin Rekening</button>
+        </div>
+        </div>
+        
+      </div>
+      
+    </section>
+    
+    <!-- Pesan Ucapan -->
+    <section id="ucapan" class="container d-flex justify-content-center align-items-center">
+      
+      <div class="card card-me text-center">
+        <h3 class="my-2 section-title">Send Greetings</h3>
+        <p>Kirim ucapan selamat untuk kedua mempelai</p>
+        <div class="greet-container">
+         
+          
+          
+          
+        </div>
+      <button class="tulis" onclick="tulis_ucapan()">Tulis pesan <i class="fa fa-pencil"></i></button>
+      </div>
+    </section>
+    
+    <section id="penutup" class="container d-flex justify-content-center align-items-center">
+      <div class="card card-me text-center d-flex flex-column justify-content-center align-items-center">
+      <p class="my-2">
+        Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan do’a restu kepada kedua mempelai.
+      </p>
+      <p class="my-2">
+        "Dan di antara tanda-tanda (kebesaran)-Nya ialah Dia menciptakan pasangan-pasangan untukmu dari jenismu sendiri, agar kamu cenderung dan merasa tenteram kepadanya, dan Dia menjadikan di antaramu rasa kasih dan sayang. Sungguh, pada yang demikian itu benar-benar terdapat tanda-tanda (kebesaran Allah) bagi kaum yang berpikir." (QS. Ar-Rum: 21)
+        </p>
+        <p class="my-2">
+          <i style="font-size: 16px;">Wassalamu'alaikum Warahmatullahi Wabarakatuh
+          </i>
+        </p>
+        <p class="my-2">Turut berbahagia, <br>
+          Segenap keluarga besar
+        </p>
+        <h1 class="nama my-2 data" part="nick">
+        Iqbal &amp; Serli
+      </h1>
+        
+      </div>
+    </section>
+  
+  <script>
+  let url = document.location.href;
+  console.log(url)
+  let untuk = url.split('?');
+  if(untuk.length > 1){
+    document.getElementsByClassName('penerima')[0].textContent = decodeURIComponent(untuk[1]);
+  }
+  
+  
+  var map = L.map('map').setView([-6.920654,109.537815], 18);
+  
+  let googleStreets = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
+    maxZoom: 20,
+    subdomains:['mt0','mt1','mt2','mt3']
+});
+  googleStreets.addTo(map)
+ /* L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);*/
+  var marker = L.marker([-6.920654,109.537815]).addTo(map);
+  marker.bindPopup("<p style='font-size: 10px; width: 120px;'><b>Lokasi Acara</b><br>Dusun II Butak, Desa Pecangakan, RT 01/ RW 02, Kec. Comal, Kab. Pemalang</p>");
+  
+  function escapeHtml(text) {
+  return text
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+}
+  
+  let db = "https://cobadb-b79a.restdb.io/rest/ucapan";
+  let apikey = "60a69606e3b6e02545edaadc";
+  function option(method, data){
+    this.mode = "cors";
+    this.cache = "no-cache";
+    this.headers = {
+      "Content-Type" : "application/json",
+      "x-apikey" : apikey,
+      "cache-control" : "no-cache",
+    }
+    this.method = method;
+    this.body = data;
+  }
+  
+  let greet = document.getElementsByClassName('greet-container')[0];
+  
+  let getParam = new option('GET', null)
+  function greet_update(){
+  fetch(db, getParam)
+  .then((res)=> res.json())
+  .then((data)=>{
+    console.log(data);
+    for(let ucapan of data)
+    greet.innerHTML += `
+      <div class="greet">
+        <p class="greet-title">${ucapan.nama}<span class="greet-ket"><i class="fa fa-bullet"></i> ${ucapan.keterangan}</span></p>
+        <hr class="w-75 mx-auto mt-0 mb-2">
+        <p>
+         ${ucapan.ucapan}
+        </p>
+     </div>
+    `
+  })
+  .catch((e)=>{
+    console.log(e.toString())
+  });
+  }
+  greet_update();
+  
+  let dataNikah = {
+    "judul" : "Iqbal & Serly",
+  }
+  let data = document.getElementsByClassName('data');
+  
+  for(part of data){
+    let tmp = part.getAttribute('part');
+    /*
+    if(tmp == "judul"){
+    part.textContent += dataNikah[tmp];
+    }
+    else{
+    part.textContent = dataNikah[tmp];
+    }
+    */
+    //console.log(tmp)
+  }
+  
+   
+    
+let countDownDate = new Date("Apr 27, 2023 08:00:00").getTime();
+
+let counter = document.getElementById('counter');
+let hari = document.getElementById('hari');
+let jam = document.getElementById('jam');
+let menit = document.getElementById('menit');
+let detik = document.getElementById('detik');
+
+// Update the count down every 1 second
+let x = setInterval(function() {
+
+  // Get today's date and time
+  let now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  let distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  hari.textContent = days + " days";
+  jam.textContent = hours + " hours";
+  menit.textContent = minutes + " min";
+  detik.textContent = seconds + " sec";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    counter.innerHTML = `<p class="text-center border border-success p-2 text-dark" style="border-radius: 5px">Acara dimulai</p>`;
+  }
+}, 1000);
+    
+    
+    let awalan = document.getElementById('awalan');
+    //untuk control menu
+    let menu = document.getElementById('menu');
+    
+    menu.classList.remove('d-flex');
+    menu.classList.add('d-none');
+    menu.setAttribute('style', 'opacity: 0.0');
+    let cover = document.getElementById('cover');
+    let batas = cover.offsetHeight;
+    batas = batas/2;
+    //console.log(batas)
+    
+    let bd = document.getElementsByTagName('body')[0];
+    
+    let tinggi = bd.offsetHeight;
+    tinggi = tinggi - (batas*2);
+    //console.log(tinggi);
+    
+    window.addEventListener('scroll', (e)=>{
+      let tem = window.scrollY;
+      //console.log(tem);
+      let hitung = tem/batas*10/10;
+      
+      if(hitung > 1){
+        hitung = 1;
+        if(tem > tinggi){
+          menu.style.bottom = "8vh";
+          
+        }
+        else{
+          menu.style.bottom = "1vh";
+        }
+      }
+      else {
+        hitung = Math.floor(hitung * 10) / 10;
+      }
+      //console.log(hitung);
+      menu.style.opacity = hitung;
+    })
+    
+    
+    function buka(){
+      
+      
+      awalan.classList.remove('d-flex');
+      awalan.classList.add('d-none');
+      menu.classList.remove('d-none');
+      menu.classList.add('d-flex');
+      let musik = new Audio('assets/musik.mp3');
+      musik.play();
+      
+    }
+    
+    //untuk lightbox galeri
+    let galeri = document.getElementsByClassName('galeri-item');
+    let count = 0;
+    for(let ft of galeri){
+      // untuk efek animasi
+      ft.setAttribute('data-aos','fade-up');
+      ft.setAttribute('data-aos-offset','200');
+      ft.setAttribute('data-aos-easing','linear');
+      
+      
+      
+      ft.addEventListener('click',(e)=>{
+        //leconsole.log(bd)
+        let lihatFoto = document.createElement('div');
+        lihatFoto.setAttribute('style','position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 6; background: rgba(0,0,0,.7);');
+        lihatFoto.setAttribute('id','lihatFoto');
+        lihatFoto.setAttribute('data-aos','fade-up');
+        lihatFoto.setAttribute('class','d-flex flex-column justify-content-center align-items-center container');
+        let btnClose = `
+          <button id="close" class="btn btn-md btn-secondary" style="position: absolute; bottom: 15vh; right: 10vw; z-index: 8; font-weight: bold;">Tutup</button>
+        `;
+        let item = `
+        <img id="fotonya" class="img-fluid mb-4" style="border-radius: 5px;" alt="lihat-foto-prewedding" src="${e.target.src}" />
+        `;
+        lihatFoto.innerHTML = item + btnClose + `<div style="height: 10vh;"></div>`;
+        
+        bd.appendChild(lihatFoto)
+        let close = document.getElementById('close');
+        close.addEventListener('click', (e)=>{
+          //console.log('clicked!');
+          bd.removeChild(lihatFoto);
+        })
+        let lhtFoto = document.getElementById('lihatFoto');
+       
+        lhtFoto.addEventListener('click', (e)=>{
+        let fotonya = document.getElementById('fotonya');
+          
+          if(!fotonya.contains(e.target)){
+          bd.removeChild(lihatFoto);
+            
+          }
+          
+        });
+      })
+    }
+    
+    function copyFunction(coba) {
+  // Get the text field
+  let teks = document.getElementById(coba);
+  let copyText = document.createElement('input');
+  copyText.value = teks.textContent;
+  //console.log(copyText.value);
+  // Select the text field
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  // For mobile devices
+   // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.value)
+  .then(
+    v => toast('Rekening disalin: ' + copyText.value),
+    e => console.log(e.toString())
+  );
+
+  }
+  
+  function toast(text){
+    let toastIni = document.createElement('div');
+    
+    toastIni.setAttribute('style','position: fixed; bottom: 15vh; width: 80vw; padding: 10px; margin: 0 10vw; background: rgba(26,136,85,1); color: #fff; text-align: center; border-radius: 8px; z-index: 11;');
+    
+    toastIni.setAttribute('class','fadeIn');
+   
+    toastIni.innerHTML = `<p>${text}</p>`;
+    
+    bd.appendChild(toastIni);
+    
+    setTimeout(()=>{
+      toastIni.classList.remove('fadeIn');
+      toastIni.classList.add('fadeOut');
+      setTimeout(()=>{
+        bd.removeChild(toastIni)
+      }, 500);
+    }, 2000);
+    
+  }
+  
+  let sec_title = document.getElementsByClassName('section-title');
+  
+  for(let jdl of sec_title){
+    jdl.setAttribute('data-aos', 'fade-up');
+  }
+  
+  let nm_couple = document.getElementsByClassName('nama');
+  for(let nm of nm_couple){
+    if(nm.getAttribute('part') != "nick"){
+      nm.setAttribute('data-aos','zoom-in')
+    }
+  }
+  
+  let tm_line = document.getElementsByClassName('animate-box');
+  for(let tm of tm_line){
+    tm.setAttribute('data-aos','zoom-in-down')
+  }
+  
+  let tm_panel = document.getElementsByClassName('timeline-panel');
+  for(let tmp of tm_panel){
+    tmp.setAttribute('data-aos','zoom-in-right')
+    tmp.setAttribute('data-aos-delay','300')
+  }
+  
+  function tulis_ucapan(){
+    let pesan = document.createElement('div');
+    pesan.setAttribute('id','pesanku');
+    pesan.setAttribute('style','position: fixed; top:0; left: 0; width: 100%; height: 100%; z-index: 9; font-family: arial;');
+    pesan.setAttribute('class','card container');
+    pesan.innerHTML = `
+    <div class="card-body flex-column d-flex justify-content-center align-items-center row">
+      <input id="nama_p" type="text" class="form-control col-12 my-1" placeholder="Masukan nama" />
+      <select id="keterangan_p" class="form-select col-12 my-1">
+        <option value="0">--Pilih Kehadiran--</option>
+        <option>Hadir</option>
+        <option>Tidak Hadir</option>
+      </select>
+      <textarea class="form-control col-12 my-1" id="ucapan_p" placeholder="Ketikan ucapan selamat..." class="form-control" rows="4"></textarea>
+      
+      <div class="col-12 mt-3 mb-2 d-flex justify-content-center align-items-center">
+      <button id="kirimpesanku" class="btn btn-md btn-success text-light w-25 mx-1">Kirim</button>
+      <button id="batalkirim" class="btn btn-md btn-secondary text-light w-25 mx-1">Batal</button>
+      </div>
+    </div>
+    `;
+    
+    console.log(bd);
+    bd.appendChild(pesan);
+    
+    let batal_p = document.getElementById('batalkirim');
+    batal_p.addEventListener('click',(e)=>{
+      bd.removeChild(pesan);
+    })
+    let ucapan = {
+      "id" : "",
+      "nama" : "",
+      "keterangan" : 0,
+      "ucapan" : ""
+    }
+    
+    let nama_p = document.getElementById('nama_p');
+    nama_p.addEventListener('change',(e)=>{
+      ucapan.nama = escapeHtml(e.target.value);
+    });
+    
+    let keterangan_p = document.getElementById('keterangan_p');
+    keterangan_p.addEventListener('change',(e)=>{
+      ucapan.keterangan = e.target.value
+    })
+    
+    let ucapan_p = document.getElementById('ucapan_p');
+    ucapan_p.addEventListener('change',(e)=>{
+      ucapan.ucapan = escapeHtml(e.target.value)
+    })
+    
+    let pesanku = document.getElementById('kirimpesanku');
+    pesanku.addEventListener('click',(e)=>{
+      if(ucapan.nama == "" || ucapan.keterangan == 0 || ucapan.ucapan == ""){
+        alert('Mohon isi nama, pilih kehadiran, dan tulis pesan 😁');
+      }
+      else {
+        toast("Pesan sedang dikirim, mohon tunggu...");
+        let postParam = new option('POST', JSON.stringify(ucapan))
+        fetch(db, postParam)
+        .then((res)=> res.json())
+        .then((data)=>{
+          console.log(data)
+          bd.removeChild(pesan)
+          greet_update();
+          let al = document.createElement('a');
+          al.href = "#ucapan";
+          al.click();
+        })
+        .catch((e)=>{
+          console.log(e.toString())
+          bd.removeChild(pesan);
+        })
+      }
+    });
+    
+  }
+  
+  
+
+   AOS.init();
+    
+  </script>
+    
+    <footer class="text-center bg-success text-white">
+      <hr class="w-75 mx-auto mb-0" />
+<p>Undangan dibuat oleh : <a href="https://wa.me/6289650292753">Afzal Azkhari</a>, gambar background dan sampul berasal dari <a href="https://www.freepik.com/free-vector/hand-drawn-minimal-background_15441932.htm#page=2&position=39&from_view=author">Freepik</a></p>
+    </footer>
+  </body>
+</html>
