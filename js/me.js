@@ -177,7 +177,11 @@ let x = setInterval(function() {
       musik.play();
       
     }
-    
+
+    awalan.addEventListener('click',(e)=>{
+      buka();
+    });
+
     //untuk lightbox galeri
     let galeri = document.getElementsByClassName('galeri-item');
     let count = 0;
