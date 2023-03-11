@@ -2,7 +2,10 @@ let url = document.location.href;
   console.log(url)
   let untuk = url.split('?');
   if(untuk.length > 1){
-    document.getElementsByClassName('penerima')[0].textContent = decodeURIComponent(untuk[1]);
+    untuk = decodeURIComponent(untuk[1]);
+    untuk = untuk.replace('-',' ');
+    untuk = untuk.replace('_',' ');
+    document.getElementsByClassName('penerima')[0].textContent = untuk;
   }
   
   
