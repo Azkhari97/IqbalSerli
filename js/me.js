@@ -1,4 +1,4 @@
-let embedVideo = "https://www.youtube.com/embed/_7pkgEI0N-Q";
+let embedVideo = "https://youtube.com/@bimbelas-syafaah2210";
 let url = document.location.href;
   console.log(url)
   let untuk = url.split('?');
