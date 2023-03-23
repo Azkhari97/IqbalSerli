@@ -33,6 +33,7 @@ let url = document.location.href;
 }
   
   let db = "https://cobadb-b79a.restdb.io/rest/ucapan";
+  db = "https://bimbelassyafaah.my.id/greetings/greet/";
   let apikey = "60a69606e3b6e02545edaadc";
   function option(method, data){
     this.mode = "cors";
@@ -50,11 +51,11 @@ let url = document.location.href;
   
   let getParam = new option('GET', null)
   function greet_update(){
-  fetch(db, getParam)
+  fetch(db)
   .then((res)=> res.json())
   .then((data)=>{
     console.log(data);
-    for(let ucapan of data)
+    for(let ucapan of data.ucapan)
     greet.innerHTML += `
       <div class="greet">
         <p class="greet-title">${ucapan.nama}<span class="greet-ket"><i class="fa fa-bullet"></i> ${ucapan.keterangan}</span></p>
@@ -354,7 +355,7 @@ let x = setInterval(function() {
       else {
         toast("Pesan sedang dikirim, mohon tunggu...");
         let postParam = new option('POST', JSON.stringify(ucapan))
-        fetch(db, postParam)
+        fetch(db + "/" + ucapan.nama + "/" + ucapan.keterangan + "/" + ucapan.ucapan)
         .then((res)=> res.json())
         .then((data)=>{
           console.log(data)
