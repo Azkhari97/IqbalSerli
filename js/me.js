@@ -55,6 +55,7 @@ let url = document.location.href;
   .then((res)=> res.json())
   .then((data)=>{
     console.log(data);
+    greet.innerHTML = "";
     for(let ucapan of data.ucapan)
     greet.innerHTML += `
       <div class="greet">
