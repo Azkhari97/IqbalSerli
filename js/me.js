@@ -10,7 +10,9 @@ let url = document.location.href;
   
   
   var map = L.map('map').setView([-6.920654,109.537815], 18);
-  
+  //map.dragging.enable = false;
+  console.log(map)
+
   let googleStreets = L.tileLayer('http://{s}.google.com/vt?lyrs=m&x={x}&y={y}&z={z}',{
     maxZoom: 20,
     subdomains:['mt0','mt1','mt2','mt3']
@@ -32,8 +34,7 @@ let url = document.location.href;
       .replace(/'/g, "&#039;");
 }
   
-  let db = "https://cobadb-b79a.restdb.io/rest/ucapan";
-  db = "https://bimbelassyafaah.my.id/greetings/greet/";
+  const db = "https://bimbelassyafaah.my.id/greetings/greet/";
   let apikey = "60a69606e3b6e02545edaadc";
   function option(method, data){
     this.mode = "cors";
@@ -170,6 +171,7 @@ let x = setInterval(function() {
       menu.style.opacity = hitung;
     })
     
+    let musik = new Audio('assets/musik.mp3');
     
     function buka(){
       
@@ -178,7 +180,7 @@ let x = setInterval(function() {
       awalan.classList.add('d-none');
       menu.classList.remove('d-none');
       menu.classList.add('d-flex');
-      let musik = new Audio('assets/musik.mp3');
+      //musik = new Audio('assets/musik.mp3');
       musik.play();
       
     }
@@ -255,7 +257,7 @@ let x = setInterval(function() {
   function toast(text){
     let toastIni = document.createElement('div');
     
-    toastIni.setAttribute('style','position: fixed; bottom: 15vh; width: 80vw; padding: 10px; margin: 0 10vw; background: rgba(26,136,85,1); color: #fff; text-align: center; border-radius: 8px; z-index: 11;');
+    toastIni.setAttribute('style','position: fixed; bottom: 15vh; width: 80vw; padding: 10px; margin: 0 10vw; background: rgba(26,136,85,1); color: #fff; text-align: center; border-radius: 8px; z-index: 1010;');
     
     toastIni.setAttribute('class','fadeIn');
    
@@ -356,7 +358,11 @@ let x = setInterval(function() {
       else {
         toast("Pesan sedang dikirim, mohon tunggu...");
         let postParam = new option('POST', JSON.stringify(ucapan))
-        fetch(db + "/" + ucapan.nama + "/" + ucapan.keterangan + "/" + ucapan.ucapan)
+        //console.log(ucapan);
+        let kirimIni = db + "/" + ucapan.nama + "/" + ucapan.keterangan + "/" + ucapan.ucapan;
+        kirimIni = encodeURI(kirimIni);
+        console.log(kirimIni);
+        fetch(kirimIni)
         .then((res)=> res.json())
         .then((data)=>{
           console.log(data)
@@ -375,6 +381,28 @@ let x = setInterval(function() {
     
   }
   
+  let stream = document.getElementById('stream');
+  
+  stream.addEventListener('click', (e)=>{
+    //console.log(bd);
+    let frame = document.createElement('div');
+    frame.setAttribute('style', 'position: fixed; color: #fff; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1002; background: rgba(0,0,0,.8);')
+    frame.innerHTML = `
+    <iframe width="100%" height="315" src="https://www.youtube.com/embed/_7pkgEI0N-Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <div class="mt-5 w-100 d-flex justify-content-center align-items-center">
+      <button id="tutupFrame" style="font-family: arial;" class="btn btn-md btn-light mx-auto">Tutup</button>
+    </div>
+    `;
+    musik.pause();
+    bd.appendChild(frame);
+    toast("Mohon tunggu, video sedang dimuat...");       
+
+    let tutupFrame = document.getElementById('tutupFrame');
+    tutupFrame.addEventListener('click',()=>{
+      bd.removeChild(frame);
+      musik.play();
+    });
+  })
   
    
    AOS.init();
