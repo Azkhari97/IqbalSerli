@@ -1,3 +1,4 @@
+let embedVideo = "https://www.youtube.com/embed/_7pkgEI0N-Q";
 let url = document.location.href;
   console.log(url)
   let untuk = url.split('?');
@@ -388,7 +389,7 @@ let x = setInterval(function() {
     let frame = document.createElement('div');
     frame.setAttribute('style', 'position: fixed; color: #fff; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1002; background: rgba(0,0,0,.8);')
     frame.innerHTML = `
-    <iframe width="100%" height="315" src="https://www.youtube.com/embed/_7pkgEI0N-Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    <iframe width="100%" height="315" src="${embedVideo}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     <div class="mt-5 w-100 d-flex justify-content-center align-items-center">
       <button id="tutupFrame" style="font-family: arial;" class="btn btn-md btn-light mx-auto">Tutup</button>
     </div>
